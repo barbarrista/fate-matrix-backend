@@ -3,6 +3,7 @@ from collections.abc import Iterable
 
 import aioinject
 
+from core.domain import fate_matrix
 from db.dependencies import create_session
 from settings import AppSettings, get_settings
 
@@ -19,6 +20,8 @@ def _register_all(
 def create_container() -> aioinject.Container:
     container = aioinject.Container()
     container.register(aioinject.Callable(create_session))
+
+    _register_all(container=container, providers=fate_matrix.PROVIDERS)
 
     for settings_cls in (AppSettings,):
         container.register(

@@ -10,6 +10,7 @@ import sentry
 from core.di import create_container
 from settings import AppSettings, get_settings
 
+from . import v1
 from .middleware import CommitSessionMiddleware
 
 
@@ -37,8 +38,8 @@ def create_app() -> FastAPI:
     return app
 
 
-def _include_routers(app: FastAPI) -> None:  # noqa: ARG001
-    pass
+def _include_routers(app: FastAPI) -> None:
+    app.include_router(v1.router)
 
 
 def _add_exception_handlers(app: FastAPI) -> None:  # noqa: ARG001

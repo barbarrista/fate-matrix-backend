@@ -13,6 +13,7 @@ dependencies = [
     "sentry-sdk>=1.29.0",
     "alembic>=1.11.2",
     "uvicorn>=0.23.2",
+    "result>=0.13.1",
 ]
 description = ""
 name = ""
