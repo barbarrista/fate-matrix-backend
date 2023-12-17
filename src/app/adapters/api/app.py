@@ -17,7 +17,7 @@ from .middleware import CommitSessionMiddleware
 @contextlib.asynccontextmanager
 async def _lifespan(
     app: FastAPI,  # noqa: ARG001 - required by lifespan protocol
-) -> AsyncIterator[None]:
+) -> AsyncIterator[None]:  # pragma: no cover
     async with aclosing(create_container()):
         yield
 
