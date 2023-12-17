@@ -37,10 +37,10 @@ class ThirdRankPersonalPointsDTO:
 
 @dataclass(frozen=True, slots=True)
 class FirstRankGenericPointsDTO:
-    i1: int
     f1: int
     g1: int
     h1: int
+    i1: int
 
 
 @dataclass(frozen=True, slots=True)

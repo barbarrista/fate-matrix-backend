@@ -54,10 +54,10 @@ class FateMatrixCalculatorService:
         dto: FirstRankPersonalPointsDTO,
     ) -> FirstRankGenericPointsDTO:
         return FirstRankGenericPointsDTO(
+            f1=sum_of_number(dto.a1 + dto.b1),
+            g1=sum_of_number(dto.b1 + dto.c1),
+            h1=sum_of_number(dto.c1 + dto.d1),
             i1=sum_of_number(dto.d1 + dto.a1),
-            f1=sum_of_number(dto.b1 + dto.c1),
-            g1=sum_of_number(dto.a1 + dto.b1),
-            h1=sum_of_number(dto.d1 + dto.c1),
         )
 
     def get_second_rank_generic_points(
@@ -66,22 +66,22 @@ class FateMatrixCalculatorService:
         third_rank_dto: ThirdRankGenericPointsDTO,
     ) -> SecondRankGenericPointsDTO:
         return SecondRankGenericPointsDTO(
-            i2=sum_of_number(first_rank_dto.i1 + third_rank_dto.i3),
-            g2=sum_of_number(first_rank_dto.g1 + third_rank_dto.g3),
             f2=sum_of_number(first_rank_dto.f1 + third_rank_dto.f3),
+            g2=sum_of_number(first_rank_dto.g1 + third_rank_dto.g3),
             h2=sum_of_number(first_rank_dto.h1 + third_rank_dto.h3),
+            i2=sum_of_number(first_rank_dto.i1 + third_rank_dto.i3),
         )
 
     def get_third_rank_generic_points(
         self,
         dto: FirstRankGenericPointsDTO,
-        comfort_zone: int,
+        k1: int,
     ) -> ThirdRankGenericPointsDTO:
         return ThirdRankGenericPointsDTO(
-            i3=sum_of_number(dto.i1 + comfort_zone),
-            g3=sum_of_number(dto.g1 + comfort_zone),
-            f3=sum_of_number(dto.f1 + comfort_zone),
-            h3=sum_of_number(dto.h1 + comfort_zone),
+            f3=sum_of_number(dto.f1 + k1),
+            g3=sum_of_number(dto.g1 + k1),
+            h3=sum_of_number(dto.h1 + k1),
+            i3=sum_of_number(dto.i1 + k1),
         )
 
     def get_love_and_money_points(self, d3: int, c3: int) -> LoveAndMoneyPointsDTO:
@@ -106,7 +106,10 @@ class FateMatrixCalculatorService:
         )
 
     def get_comfort_zone(self, dto: FirstRankPersonalPointsDTO) -> int:
-        return sum_of_number(dto.a1 + dto.b1 + dto.c1 + dto.d1)
+        return sum_of_number(sum((dto.a1, dto.b1, dto.c1, dto.d1)))
+
+    def get_k1_point(self, dto: FirstRankGenericPointsDTO) -> int:
+        return sum_of_number(sum((dto.f1, dto.g1, dto.h1, dto.i1)))
 
     def build_point_bundle(self, date_of_birth: date) -> PointBundleDTO:
         first_rank_personal_dto = self.get_first_rank_personal_points(date_of_birth)
@@ -123,9 +126,10 @@ class FateMatrixCalculatorService:
         first_rank_generic_dto = self.get_first_rank_generic_points(
             first_rank_personal_dto,
         )
+        k1 = self.get_k1_point(first_rank_generic_dto)
         third_rank_generic_dto = self.get_third_rank_generic_points(
             dto=first_rank_generic_dto,
-            comfort_zone=comfort_zone,
+            k1=k1,
         )
         second_rank_generic_dto = self.get_second_rank_generic_points(
             first_rank_dto=first_rank_generic_dto,
@@ -136,12 +140,11 @@ class FateMatrixCalculatorService:
             c3=third_rank_personal_dto.c3,
         )
         support_points = self.get_support_points(
-            a3=third_rank_personal_dto.d3,
-            b3=third_rank_personal_dto.c3,
+            a3=third_rank_personal_dto.a3,
+            b3=third_rank_personal_dto.b3,
             comfort_zone=comfort_zone,
         )
 
-        k1 = sum_of_number(third_rank_personal_dto.a3 + third_rank_personal_dto.c3)
         k2 = sum_of_number(comfort_zone + k1)
         h4 = sum_of_number(second_rank_personal_dto.c2 + second_rank_personal_dto.d2)
 
