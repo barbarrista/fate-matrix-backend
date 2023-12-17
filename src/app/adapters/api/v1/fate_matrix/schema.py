@@ -1,15 +1,14 @@
 from datetime import date
 from typing import Self
 
-from core.domain.fate_matrix.dto import (
+from app.adapters.api.schema import BaseSchema
+from app.core.domain.fate_matrix.dto import (
     CreateFateMatrixDTO,
     FateMatrixDTO,
     GenericSquareDTO,
     SelfSquareDTO,
 )
-from db.enums import Gender
-
-from adapters.api.schema import BaseSchema
+from app.db.enums import Gender
 
 
 class CreateFateMatrixSchema(BaseSchema):

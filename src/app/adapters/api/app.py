@@ -2,13 +2,13 @@ import contextlib
 from collections.abc import AsyncIterator
 from contextlib import aclosing
 
-import sentry
 from aioinject.ext.fastapi import AioInjectMiddleware
 from fastapi import FastAPI
-from settings import AppSettings, get_settings
 from starlette.middleware.cors import CORSMiddleware
 
-from app.di._container import create_container
+from app import sentry
+from app.di import create_container
+from app.settings import AppSettings, get_settings
 
 from . import v1
 from .middleware import CommitSessionMiddleware

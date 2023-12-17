@@ -3,10 +3,13 @@ from typing import Annotated
 
 from aioinject import Inject
 from aioinject.ext.fastapi import inject
-from core.domain.fate_matrix.commands.create_fate_matrix import CreateFateMatrixCommand
 from fastapi import APIRouter
 from result import Err
 from starlette import status
+
+from app.core.domain.fate_matrix.commands.create_fate_matrix import (
+    CreateFateMatrixCommand,
+)
 
 from .schema import CreateFateMatrixSchema, FateMatrixSchema, PointsSchema
 

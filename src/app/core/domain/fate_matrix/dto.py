@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from datetime import date
 from typing import Protocol
 
-from db.enums import Gender
+from app.db.enums import Gender
 
 
 class AsSequenceProtocol(Protocol):

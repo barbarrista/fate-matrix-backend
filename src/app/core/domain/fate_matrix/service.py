@@ -1,6 +1,6 @@
 from datetime import date
 
-from core.domain.fate_matrix.dto import (
+from app.core.domain.fate_matrix.dto import (
     DiagonalSquareVerticeDTO,
     GenericSquareDTO,
     KarmicTailLassoDTO,
@@ -12,7 +12,7 @@ from core.domain.fate_matrix.dto import (
 
 
 class FateMatrixCalculatorService:
-    max_lasso_count = 22
+    max_archetypes_count = 22
 
     def calculate_first_diagonal_square(
         self,
@@ -113,7 +113,7 @@ class FateMatrixCalculatorService:
         )
 
     def sum_of_number(self, number: int) -> int:
-        if number <= self.max_lasso_count:
+        if number <= self.max_archetypes_count:
             return number
 
         sum_ = 0
@@ -121,7 +121,7 @@ class FateMatrixCalculatorService:
             sum_ = sum_ + (number % 10)
             number = number // 10
 
-        if sum_ > self.max_lasso_count:
+        if sum_ > self.max_archetypes_count:
             return self.sum_of_number(number=sum_)
 
         return sum_

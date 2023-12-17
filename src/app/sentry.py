@@ -1,5 +1,6 @@
 import sentry_sdk
-from settings import SentrySettings, get_settings
+
+from app.settings import SentrySettings, get_settings
 
 
 def init_sentry() -> None:

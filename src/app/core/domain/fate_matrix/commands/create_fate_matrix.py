@@ -1,6 +1,7 @@
-from core.domain.fate_matrix.dto import CreateFateMatrixDTO, PointsDTO
-from core.domain.fate_matrix.service import FateMatrixCalculatorService
 from result import Ok, Result
+
+from app.core.domain.fate_matrix.dto import CreateFateMatrixDTO, PointsDTO
+from app.core.domain.fate_matrix.service import FateMatrixCalculatorService
 
 
 class CreateFateMatrixCommand:

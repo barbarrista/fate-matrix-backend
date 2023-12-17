@@ -3,9 +3,9 @@ import itertools
 from collections.abc import Iterable
 
 import aioinject
-from db.dependencies import create_session
-from settings import AppSettings, get_settings
 
+from app.db.dependencies import create_session
+from app.settings import AppSettings, get_settings
 from lib.di import Providers
 
 from .modules import fate_matrix

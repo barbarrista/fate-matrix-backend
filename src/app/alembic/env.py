@@ -1,14 +1,15 @@
 import asyncio
 from logging.config import fileConfig
 
-import db.models  # noqa: F401
-import sentry
 from alembic import context
-from db import Base
-from settings import DatabaseSettings, get_settings
 from sqlalchemy import engine_from_config, pool
 from sqlalchemy.engine import Connectable, Connection
 from sqlalchemy.ext.asyncio import AsyncEngine
+
+import app.db.models  # noqa: F401
+from app import sentry
+from app.db import Base
+from app.settings import DatabaseSettings, get_settings
 
 sentry.init_sentry()
 config = context.config
