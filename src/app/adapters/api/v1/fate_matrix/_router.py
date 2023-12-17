@@ -1,15 +1,19 @@
+from datetime import date
 from http import HTTPStatus
 from typing import Annotated
 
 from aioinject import Inject
 from aioinject.ext.fastapi import inject
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
+from fastapi.responses import HTMLResponse
 from result import Err
 
 from app.core.domain.fate_matrix.commands import (
     CreateFateMatrixCommand,
 )
+from app.core.domain.fate_matrix.dto import CreateFateMatrixDTO
 from app.core.template_builder.builder import TemplateBuilder
+from app.db.enums import Gender
 
 from .schema import CreateFateMatrixSchema
 
@@ -29,3 +33,25 @@ async def create_personal_fate_matrix(
         raise NotImplementedError
 
     return template_builder.personal_fate_matrix(result.ok_value)
+
+
+@router.get("")
+@inject
+async def build_personal_fate_matrix(
+    date_of_birth: Annotated[date, Query(alias="dateOfBirth")],
+    command: Annotated[CreateFateMatrixCommand, Inject],
+    template_builder: Annotated[TemplateBuilder, Inject],
+) -> HTMLResponse:
+    result = await command.execute(
+        dto=CreateFateMatrixDTO(
+            name="Name",
+            date_of_birth=date_of_birth,
+            gender=Gender.male,
+        ),
+    )
+
+    if isinstance(result, Err):
+        raise NotImplementedError
+
+    svg = template_builder.personal_fate_matrix(result.ok_value)
+    return HTMLResponse(content=svg)
