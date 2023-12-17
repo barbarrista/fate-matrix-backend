@@ -30,60 +30,69 @@ class FateMatrixCalculatorService:
         first_rank_dto: FirstRankPersonalPointsDTO,
         third_rank_dto: ThirdRankPersonalPointsDTO,
     ) -> SecondRankPersonalPointsDTO:
-        a2 = first_rank_dto.a1 + third_rank_dto.a3
-        b2 = first_rank_dto.b1 + third_rank_dto.b3
-        c2 = first_rank_dto.c1 + third_rank_dto.c3
-        d2 = first_rank_dto.d1 + third_rank_dto.d3
-        return SecondRankPersonalPointsDTO(a2=a2, b2=b2, c2=c2, d2=d2)
+        return SecondRankPersonalPointsDTO(
+            a2=sum_of_number(first_rank_dto.a1 + third_rank_dto.a3),
+            b2=sum_of_number(first_rank_dto.b1 + third_rank_dto.b3),
+            c2=sum_of_number(first_rank_dto.c1 + third_rank_dto.c3),
+            d2=sum_of_number(first_rank_dto.d1 + third_rank_dto.d3),
+        )
 
     def get_third_rank_personal_points(
         self,
         dto: FirstRankPersonalPointsDTO,
         comfort_zone: int,
     ) -> ThirdRankPersonalPointsDTO:
-        a3 = dto.a1 + comfort_zone
-        b3 = dto.b1 + comfort_zone
-        c3 = dto.c1 + comfort_zone
-        d3 = dto.d1 + comfort_zone
-        return ThirdRankPersonalPointsDTO(a3=a3, b3=b3, c3=c3, d3=d3)
+        return ThirdRankPersonalPointsDTO(
+            a3=sum_of_number(dto.a1 + comfort_zone),
+            b3=sum_of_number(dto.b1 + comfort_zone),
+            c3=sum_of_number(dto.c1 + comfort_zone),
+            d3=sum_of_number(dto.d1 + comfort_zone),
+        )
 
     def get_first_rank_generic_points(
         self,
         dto: FirstRankPersonalPointsDTO,
     ) -> FirstRankGenericPointsDTO:
-        i1 = dto.d1 + dto.a1
-        g1 = dto.b1 + dto.c1
-        f1 = dto.a1 + dto.b1
-        h1 = dto.d1 + dto.c1
-        return FirstRankGenericPointsDTO(i1=i1, f1=f1, g1=g1, h1=h1)
+        return FirstRankGenericPointsDTO(
+            i1=sum_of_number(dto.d1 + dto.a1),
+            f1=sum_of_number(dto.b1 + dto.c1),
+            g1=sum_of_number(dto.a1 + dto.b1),
+            h1=sum_of_number(dto.d1 + dto.c1),
+        )
 
     def get_second_rank_generic_points(
         self,
         first_rank_dto: FirstRankGenericPointsDTO,
         third_rank_dto: ThirdRankGenericPointsDTO,
     ) -> SecondRankGenericPointsDTO:
-        i2 = first_rank_dto.i1 + third_rank_dto.i3
-        g2 = first_rank_dto.g1 + third_rank_dto.g3
-        f2 = first_rank_dto.f1 + third_rank_dto.f3
-        h2 = first_rank_dto.h1 + third_rank_dto.h3
-        return SecondRankGenericPointsDTO(i2=i2, g2=g2, f2=f2, h2=h2)
+        return SecondRankGenericPointsDTO(
+            i2=sum_of_number(first_rank_dto.i1 + third_rank_dto.i3),
+            g2=sum_of_number(first_rank_dto.g1 + third_rank_dto.g3),
+            f2=sum_of_number(first_rank_dto.f1 + third_rank_dto.f3),
+            h2=sum_of_number(first_rank_dto.h1 + third_rank_dto.h3),
+        )
 
     def get_third_rank_generic_points(
         self,
         dto: FirstRankGenericPointsDTO,
         comfort_zone: int,
     ) -> ThirdRankGenericPointsDTO:
-        i3 = dto.i1 + comfort_zone
-        g3 = dto.g1 + comfort_zone
-        f3 = dto.f1 + comfort_zone
-        h3 = dto.h1 + comfort_zone
-        return ThirdRankGenericPointsDTO(i3=i3, g3=g3, f3=f3, h3=h3)
+        return ThirdRankGenericPointsDTO(
+            i3=sum_of_number(dto.i1 + comfort_zone),
+            g3=sum_of_number(dto.g1 + comfort_zone),
+            f3=sum_of_number(dto.f1 + comfort_zone),
+            h3=sum_of_number(dto.h1 + comfort_zone),
+        )
 
     def get_love_and_money_points(self, d3: int, c3: int) -> LoveAndMoneyPointsDTO:
-        j2 = d3 + c3
-        j1 = d3 + j2
-        j3 = c3 + j2
-        return LoveAndMoneyPointsDTO(j1=j1, j2=j2, j3=j3)
+        j2 = sum_of_number(d3 + c3)
+        j1 = sum_of_number(d3 + j2)
+        j3 = sum_of_number(c3 + j2)
+        return LoveAndMoneyPointsDTO(
+            j1=j1,
+            j2=j2,
+            j3=j3,
+        )
 
     def get_support_points(
         self,
@@ -92,8 +101,8 @@ class FateMatrixCalculatorService:
         comfort_zone: int,
     ) -> SupportPointsDTO:
         return SupportPointsDTO(
-            l1=a3 + comfort_zone,
-            l2=b3 + comfort_zone,
+            l1=sum_of_number(a3 + comfort_zone),
+            l2=sum_of_number(b3 + comfort_zone),
         )
 
     def get_comfort_zone(self, dto: FirstRankPersonalPointsDTO) -> int:

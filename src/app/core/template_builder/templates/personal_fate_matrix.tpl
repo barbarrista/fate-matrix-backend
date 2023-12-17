@@ -75,4 +75,3 @@
     <circle cx="380.024" cy="328.506" r="19.443" fill="white" stroke="black" stroke-width="2"/>
     <text fill="black" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="24" letter-spacing="0em"><tspan x="368.524" y="337.233">{{ dto.k1 }}</tspan></text>
     </svg>
-    
