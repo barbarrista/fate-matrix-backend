@@ -6,7 +6,7 @@ from aioinject.ext.fastapi import inject
 from fastapi import APIRouter
 from result import Err
 
-from app.core.domain.fate_matrix.commands.build_fate_matrix import (
+from app.core.domain.fate_matrix.commands import (
     CreateFateMatrixCommand,
 )
 from app.core.template_builder.builder import TemplateBuilder
