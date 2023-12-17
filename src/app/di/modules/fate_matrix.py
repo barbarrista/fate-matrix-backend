@@ -1,6 +1,6 @@
 import aioinject
 
-from app.core.domain.fate_matrix.commands.create_fate_matrix import (
+from app.core.domain.fate_matrix.commands import (
     CreateFateMatrixCommand,
 )
 from app.core.domain.fate_matrix.service import FateMatrixCalculatorService

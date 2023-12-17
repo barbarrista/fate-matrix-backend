@@ -1,85 +1,7 @@
-from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import date
-from typing import Protocol
 
 from app.db.enums import Gender
-
-
-class AsSequenceProtocol(Protocol):
-    def as_tuple(self) -> Sequence[int]:
-        ...
-
-
-@dataclass(frozen=True, slots=True)
-class GenericSquareDTO:
-    bottom_left: int
-    top_left: int
-    top_right: int
-    bottom_right: int
-
-
-@dataclass(frozen=True, slots=True)
-class PortraitLassoDTO(AsSequenceProtocol):
-    right: int
-    middle: int
-    left: int
-
-    def as_tuple(self) -> Sequence[int]:
-        return (self.right, self.middle, self.left)
-
-
-@dataclass(frozen=True, slots=True)
-class TalentsLassoDTO(AsSequenceProtocol):
-    bottom: int
-    middle: int
-    top: int
-
-    def as_tuple(self) -> Sequence[int]:
-        return (self.bottom, self.middle, self.top)
-
-
-@dataclass(frozen=True, slots=True)
-class MaterialKarmaLassoDTO(AsSequenceProtocol):
-    left: int
-    middle: int
-    right: int
-
-    def as_tuple(self) -> Sequence[int]:
-        return (self.left, self.middle, self.right)
-
-
-@dataclass(frozen=True, slots=True)
-class KarmicTailLassoDTO(AsSequenceProtocol):
-    top: int
-    middle: int
-    bottom: int
-
-    def as_tuple(self) -> Sequence[int]:
-        return (self.top, self.middle, self.bottom)
-
-
-@dataclass(frozen=True, slots=True)
-class SelfSquareDTO:
-    portrait: PortraitLassoDTO
-    talents: TalentsLassoDTO
-    material_karma: MaterialKarmaLassoDTO
-    karmic_tail: KarmicTailLassoDTO
-
-
-@dataclass(frozen=True, slots=True)
-class DiagonalSquareVerticeDTO:
-    left: int
-    top: int
-    right: int
-    bottom: int
-
-
-@dataclass(frozen=True, slots=True)
-class FateMatrixDTO:
-    comfort_zone: int
-    generic_square: GenericSquareDTO
-    self_square: SelfSquareDTO
 
 
 @dataclass(frozen=True, slots=True)
@@ -90,7 +12,68 @@ class CreateFateMatrixDTO:
 
 
 @dataclass(frozen=True, slots=True)
-class PointsDTO:
+class FirstRankPersonalPointsDTO:
+    a1: int
+    b1: int
+    c1: int
+    d1: int
+
+
+@dataclass(frozen=True, slots=True)
+class SecondRankPersonalPointsDTO:
+    a2: int
+    b2: int
+    c2: int
+    d2: int
+
+
+@dataclass(frozen=True, slots=True)
+class ThirdRankPersonalPointsDTO:
+    a3: int
+    b3: int
+    c3: int
+    d3: int
+
+
+@dataclass(frozen=True, slots=True)
+class FirstRankGenericPointsDTO:
+    i1: int
+    f1: int
+    g1: int
+    h1: int
+
+
+@dataclass(frozen=True, slots=True)
+class SecondRankGenericPointsDTO:
+    i2: int
+    f2: int
+    g2: int
+    h2: int
+
+
+@dataclass(frozen=True, slots=True)
+class ThirdRankGenericPointsDTO:
+    i3: int
+    f3: int
+    g3: int
+    h3: int
+
+
+@dataclass(frozen=True, slots=True)
+class LoveAndMoneyPointsDTO:
+    j1: int
+    j2: int
+    j3: int
+
+
+@dataclass(frozen=True, slots=True)
+class SupportPointsDTO:
+    l1: int
+    l2: int
+
+
+@dataclass(frozen=True, slots=True)
+class PointBundleDTO:
     a1: int
     a2: int
     a3: int

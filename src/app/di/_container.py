@@ -3,16 +3,20 @@ import itertools
 from collections.abc import Iterable
 
 import aioinject
+from pydantic_settings import BaseSettings
 
 from app.db.dependencies import create_session
 from app.settings import AppSettings, get_settings
 from lib.di import Providers
 
-from .modules import fate_matrix
+from .modules import fate_matrix, template_builder
 
-MODULES: Iterable[Providers] = (fate_matrix.PROVIDERS,)
+MODULES: Iterable[Providers] = (
+    fate_matrix.PROVIDERS,
+    template_builder.PROVIDERS,
+)
 
-SETTINGS = (AppSettings,)
+SETTINGS: Iterable[type[BaseSettings]] = (AppSettings,)
 
 
 def _register_providers(

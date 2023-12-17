@@ -1,4 +1,3 @@
-from dataclasses import asdict
 from typing import Annotated
 
 from aioinject import Inject
@@ -7,11 +6,12 @@ from fastapi import APIRouter
 from result import Err
 from starlette import status
 
-from app.core.domain.fate_matrix.commands.create_fate_matrix import (
+from app.core.domain.fate_matrix.commands.build_fate_matrix import (
     CreateFateMatrixCommand,
 )
+from app.core.template_builder.builder import TemplateBuilder
 
-from .schema import CreateFateMatrixSchema, FateMatrixSchema, PointsSchema
+from .schema import CreateFateMatrixSchema, FateMatrixSchema
 
 router = APIRouter(prefix="/fate-matrix", tags=["fate-matrix"])
 
@@ -25,13 +25,14 @@ router = APIRouter(prefix="/fate-matrix", tags=["fate-matrix"])
     },
 )
 @inject
-async def create_fate_matrix(
+async def create_personal_fate_matrix(
     schema: CreateFateMatrixSchema,
     command: Annotated[CreateFateMatrixCommand, Inject],
-) -> PointsSchema:
+    template_builder: Annotated[TemplateBuilder, Inject],
+) -> str:
     result = await command.execute(dto=schema.to_dto())
 
     if isinstance(result, Err):
         raise NotImplementedError
 
-    return PointsSchema.model_validate(asdict(result.ok_value))
+    return template_builder.personal_fate_matrix(result.ok_value)

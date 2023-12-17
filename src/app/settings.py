@@ -3,10 +3,13 @@ from typing import TypeVar
 from urllib.parse import quote_plus
 
 import dotenv
+from anyio import Path
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 TSettings = TypeVar("TSettings", bound=BaseSettings)
+
+BASE_DIR = Path(__file__).parent
 
 
 def get_settings(cls: type[TSettings]) -> TSettings:
