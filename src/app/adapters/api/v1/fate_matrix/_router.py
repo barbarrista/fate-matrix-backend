@@ -27,7 +27,7 @@ async def create_personal_fate_matrix(
     command: Annotated[CreateFateMatrixCommand, Inject],
     template_builder: Annotated[TemplateBuilder, Inject],
 ) -> str:
-    result = await command.execute(dto=schema.to_dto())
+    result = command.execute(dto=schema.to_dto())
 
     if isinstance(result, Err):
         raise NotImplementedError
@@ -42,7 +42,7 @@ async def build_personal_fate_matrix(
     command: Annotated[CreateFateMatrixCommand, Inject],
     template_builder: Annotated[TemplateBuilder, Inject],
 ) -> HTMLResponse:
-    result = await command.execute(
+    result = command.execute(
         dto=CreateFateMatrixDTO(
             name="Name",
             date_of_birth=date_of_birth,
