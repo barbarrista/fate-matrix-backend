@@ -6,7 +6,7 @@ import httpx
 import pytest
 from fastapi import FastAPI
 
-from core.di import create_container
+from app.di import create_container
 
 dotenv.load_dotenv(".env")
 
@@ -24,7 +24,7 @@ def anyio_backend() -> str:
 
 @pytest.fixture(scope="session")
 def fastapi_app() -> FastAPI:
-    from adapters.api.app import create_app
+    from app.adapters.api.app import create_app
 
     return create_app()
 

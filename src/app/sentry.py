@@ -1,5 +1,4 @@
 import sentry_sdk
-
 from settings import SentrySettings, get_settings
 
 

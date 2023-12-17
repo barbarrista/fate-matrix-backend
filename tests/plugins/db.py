@@ -2,9 +2,8 @@ import os
 
 import dotenv
 import pytest
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
-
 from alembic import config
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 dotenv.load_dotenv(".env")
 
@@ -21,9 +20,9 @@ def database_url() -> str:
 
 @pytest.fixture(scope="session", name="async_sessionmaker")
 def async_sessionmaker_() -> async_sessionmaker[AsyncSession]:
-    import db.engine
+    import app.db.engine
 
-    return db.engine.async_session_factory
+    return app.db.engine.async_session_factory
 
 
 @pytest.fixture(scope="session")

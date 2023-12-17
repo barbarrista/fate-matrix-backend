@@ -41,7 +41,10 @@ numeric_10_3 = Annotated[Decimal, mapped_column(Numeric(precision=10, scale=3))]
 str_3 = Annotated[str, 3]
 str_16 = Annotated[str, 16]
 str_32 = Annotated[str, 32]
+str_64 = Annotated[str, 64]
+str_128 = Annotated[str, 128]
 str_255 = Annotated[str, 255]
+str_320 = Annotated[str, 320]
 
 
 class Base(DeclarativeBase):
@@ -50,8 +53,13 @@ class Base(DeclarativeBase):
     registry = registry(
         type_annotation_map={
             datetime: DateTime(timezone=True),
-            str_255: String(255),
+            str_3: String(3),
+            str_16: String(16),
             str_32: String(32),
+            str_64: String(64),
+            str_128: String(128),
+            str_255: String(255),
+            str_320: String(320),
             enum.Enum: Enum(native_enum=False),
         },
     )

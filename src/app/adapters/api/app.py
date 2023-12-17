@@ -2,13 +2,13 @@ import contextlib
 from collections.abc import AsyncIterator
 from contextlib import aclosing
 
-from aioinject.ext.fastapi import InjectMiddleware
+import sentry
+from aioinject.ext.fastapi import AioInjectMiddleware
 from fastapi import FastAPI
+from settings import AppSettings, get_settings
 from starlette.middleware.cors import CORSMiddleware
 
-import sentry
-from core.di import create_container
-from settings import AppSettings, get_settings
+from app.di._container import create_container
 
 from . import v1
 from .middleware import CommitSessionMiddleware
@@ -50,7 +50,7 @@ def _add_middlewares(app: FastAPI) -> None:
     app_settings = get_settings(AppSettings)
 
     app.add_middleware(CommitSessionMiddleware)
-    app.add_middleware(InjectMiddleware, container=create_container())
+    app.add_middleware(AioInjectMiddleware, container=create_container())
     app.add_middleware(
         CORSMiddleware,
         allow_origins=app_settings.allow_origins,

@@ -4,16 +4,17 @@ authors = [
 ]
 dependencies = [
     "fastapi[uvicorn]>=0.100.1",
-    "pydantic>=2.1.1",
+    "pydantic>=2.5.2",
     "asyncpg>=0.28.0",
-    "aioinject>=0.9.1",
+    "aioinject>=0.15.0",
     "python-dotenv>=1.0.0",
-    "pydantic-settings>=2.0.2",
+    "pydantic-settings>=2.1.0",
     "sqlalchemy>=2.0.19",
     "sentry-sdk>=1.29.0",
     "alembic>=1.11.2",
     "uvicorn>=0.23.2",
     "result>=0.13.1",
+    "Jinja2>=3.1.2",
 ]
 description = ""
 name = ""
@@ -30,18 +31,19 @@ requires = ["pdm-pep517>=1.0.0"]
 [tool.pdm]
 [tool.pdm.dev-dependencies]
 dev = [
-    "black>=23.3.0",
-    "isort>=5.12.0",
-    "mypy>=1.4.0",
+    "black>=23.12.0",
+    "isort>=5.13.2",
+    "mypy>=1.7.1",
     "pytest>=7.3.2",
     "coverage>=7.2.7",
     "httpx>=0.24.1",
-    "ruff>=0.0.274",
+    "ruff>=0.1.8",
     "anyio>=3.7.0",
     "radon>=6.0.1",
     "sqlalchemy-pytest>=0.1.0",
     "types-click>=7.1.8",
     "sqlalchemy-pytest>=0.0.2",
+    "deptry>=0.12.0",
 ]
 
 [tool.pytest.ini_options]

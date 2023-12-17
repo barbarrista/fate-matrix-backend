@@ -1,0 +1,40 @@
+import functools
+import itertools
+from collections.abc import Iterable
+
+import aioinject
+from db.dependencies import create_session
+from settings import AppSettings, get_settings
+
+from lib.di import Providers
+
+from .modules import fate_matrix
+
+MODULES: Iterable[Providers] = (fate_matrix.PROVIDERS,)
+
+SETTINGS = (AppSettings,)
+
+
+def _register_providers(
+    container: aioinject.Container,
+) -> None:
+    for provider in itertools.chain.from_iterable(MODULES):
+        container.register(provider)
+
+
+def _register_settings(container: aioinject.Container) -> None:
+    for settings_cls in SETTINGS:
+        container.register(
+            aioinject.Object(get_settings(settings_cls), type_=settings_cls),
+        )
+
+
+@functools.lru_cache
+def create_container() -> aioinject.Container:
+    container = aioinject.Container()
+    container.register(aioinject.Callable(create_session))
+
+    _register_providers(container)
+    _register_settings(container)
+
+    return container

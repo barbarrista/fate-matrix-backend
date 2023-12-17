@@ -48,12 +48,12 @@ class FateMatrixCalculatorService:
     def calculate_third_diagonal_square(
         self,
         first_square: DiagonalSquareVerticeDTO,
-        main_lasso: int,
+        comfort_zone: int,
     ) -> DiagonalSquareVerticeDTO:
-        left = self.sum_of_number(first_square.left + main_lasso)
-        top = self.sum_of_number(first_square.top + main_lasso)
-        right = self.sum_of_number(first_square.right + main_lasso)
-        bottom = self.sum_of_number(first_square.bottom + main_lasso)
+        left = self.sum_of_number(first_square.left + comfort_zone)
+        top = self.sum_of_number(first_square.top + comfort_zone)
+        right = self.sum_of_number(first_square.right + comfort_zone)
+        bottom = self.sum_of_number(first_square.bottom + comfort_zone)
         return DiagonalSquareVerticeDTO(
             left=left,
             top=top,
@@ -61,7 +61,7 @@ class FateMatrixCalculatorService:
             bottom=bottom,
         )
 
-    def calculate_main_lasso(self, dto: DiagonalSquareVerticeDTO) -> int:
+    def get_comfort_zone(self, dto: DiagonalSquareVerticeDTO) -> int:
         return self.sum_of_number(number=dto.left + dto.top + dto.right + dto.bottom)
 
     def calculate_generic_square(
@@ -79,8 +79,8 @@ class FateMatrixCalculatorService:
             bottom_right=bottom_right,
         )
 
+    @staticmethod
     def get_build_self_square(
-        self,
         first_square: DiagonalSquareVerticeDTO,
         second_square: DiagonalSquareVerticeDTO,
         third_square: DiagonalSquareVerticeDTO,

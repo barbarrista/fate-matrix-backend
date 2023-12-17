@@ -45,5 +45,5 @@ class SentrySettings(BaseSettings):
 class AppSettings(BaseSettings):
     model_config = SettingsConfigDict(str_strip_whitespace=True, env_prefix="app_")
 
-    allow_origins: list[str] = []  # noqa: RUF012
+    allow_origins: list[str] = []
     allow_origin_regex: str | None = None
